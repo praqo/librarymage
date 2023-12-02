@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Header from "../components/Header";
+import Search from "../components/Search";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <Header />
+        <Search />
       </main>
 
       <footer className={styles.footer}></footer>
