@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 function search() {
   const router = useRouter();
@@ -11,13 +12,35 @@ function search() {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      setFetchedData(data);
-      setIsLoading(false);
+      console.log(data);
+      filterData(data);
     } catch (error) {
       console.log(error);
       alert("error try again later");
       router.push("/");
     }
+  };
+
+  const filterData = (data) => {
+    const filteredData = [];
+    data.cards.forEach((card) => {
+      let duplicateCard = false;
+      if (card.printings.length > 1) {
+        for (let i = 0; i < filteredData.length; i++) {
+          if (card.name === filteredData[i].name) {
+            duplicateCard = true;
+            break;
+          }
+        }
+      }
+
+      if (!duplicateCard) {
+        filteredData.push(card);
+      }
+    });
+    console.log(filteredData);
+    setFetchedData(filteredData);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -40,7 +63,21 @@ function search() {
   return (
     <div>
       <h3>Search results</h3>
-      <div>{JSON.stringify(fetchedData)}</div>
+      <div className="grid">
+        {fetchedData.map((card) => {
+          return (
+            <div key={card.id} className="grid-item">
+              <Link
+                href={{ pathname: "card", query: { id: card.multiverseid } }}
+              >
+                <a className="card-link">
+                  <img src={card.imageUrl} alt="" className="card-image" />
+                </a>
+              </Link>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
