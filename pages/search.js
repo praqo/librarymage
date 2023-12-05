@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Pagination from "../components/Pagination";
 
 function search() {
   const router = useRouter();
   const [fetchedData, setFetchedData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const [page, setPage] = useState(1);
 
   const fetchData = async (url) => {
     try {
@@ -54,16 +56,20 @@ function search() {
 
   useEffect(() => {
     setSearchQuery(router.query.q);
+    if (router.query.page) {
+      setPage(router.query.page);
+    }
+
     console.log(searchQuery);
   });
 
   useEffect(() => {
     if (searchQuery) {
-      const url = `https://api.magicthegathering.io/v1/cards?name=${searchQuery}&page=1`;
+      const url = `https://api.magicthegathering.io/v1/cards?name=${searchQuery}&page=${page}`;
 
       fetchData(url);
     }
-  }, [searchQuery]);
+  }, [searchQuery, page]);
 
   if (isLoading) {
     return <h3>Loading...</h3>;
@@ -87,6 +93,7 @@ function search() {
           );
         })}
       </div>
+      {fetchedData.totalCount / 100 > 1 && <Pagination data={fetchedData} />}
     </div>
   );
 }
