@@ -12,8 +12,14 @@ function search() {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      console.log(data);
-      filterData(data);
+      console.log({
+        allData: data,
+        totalCount: response.headers.get("Total-Count"),
+      });
+      filterData({
+        allData: data,
+        totalCount: response.headers.get("Total-Count"),
+      });
     } catch (error) {
       console.log(error);
       alert("error try again later");
@@ -23,7 +29,7 @@ function search() {
 
   const filterData = (data) => {
     const filteredData = [];
-    data.cards.forEach((card) => {
+    data.allData.cards.forEach((card) => {
       let duplicateCard = false;
       if (card.printings.length > 1) {
         for (let i = 0; i < filteredData.length; i++) {
@@ -39,7 +45,10 @@ function search() {
       }
     });
     console.log(filteredData);
-    setFetchedData(filteredData);
+    setFetchedData({
+      data: filteredData,
+      totalCount: data.totalCount,
+    });
     setIsLoading(false);
   };
 
@@ -50,7 +59,7 @@ function search() {
 
   useEffect(() => {
     if (searchQuery) {
-      const url = `https://api.magicthegathering.io/v1/cards?name=${searchQuery}`;
+      const url = `https://api.magicthegathering.io/v1/cards?name=${searchQuery}&page=1`;
 
       fetchData(url);
     }
@@ -64,7 +73,7 @@ function search() {
     <div>
       <h3>Search results</h3>
       <div className="grid">
-        {fetchedData.map((card) => {
+        {fetchedData.data.map((card) => {
           return (
             <div key={card.id} className="grid-item">
               <Link
