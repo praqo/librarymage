@@ -13,15 +13,23 @@ function search() {
   const { searchData, searchResults, isLoading } = useGlobalContext();
 
   useEffect(() => {
-    setSearchQuery(router.query.q);
+    console.log(router.query.q);
+    if (router.query.q) {
+      setSearchQuery(router.query.q);
+    }
+
     if (router.query.page) {
       setPage(router.query.page);
     }
+  });
 
-    searchData(
-      `https://api.magicthegathering.io/v1/cards?name=${searchQuery}&page=${page}`
-    );
-  }, []);
+  useEffect(() => {
+    if (searchQuery) {
+      searchData(
+        `https://api.magicthegathering.io/v1/cards?name=${searchQuery}&page=${page}`
+      );
+    }
+  }, [searchQuery]);
 
   if (isLoading) {
     return <h3>Loading...</h3>;
