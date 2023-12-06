@@ -1,73 +1,43 @@
-import { createContext, useState } from "react";
-import { useRouter } from "next/router";
+import { createContext, useContext, useEffect, useReducer } from "react";
+import reducer from "./reducer";
 
-export const AppContext = createContext();
+const AppContext = createContext();
 
-export function ContextProvider({ children }) {
-  const router = useRouter();
-  const [searchData, setSearchData] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
-  const [currentSearchPage, setCurrentSearchPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+const initialState = {
+  isLoading: true,
+  searchResults: [],
+};
 
-  const fetchData = async (url) => {
+const AppProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const searchData = async (url) => {
+    dispatch({ type: "LOADING" });
     try {
-      setIsLoading(true);
       console.log(url);
       const response = await fetch(url);
       const data = await response.json();
       console.log(data);
-      setSearchData(data);
-      console.log(searchData);
+      dispatch({ type: "SEARCH_RESULTS", payload: data });
     } catch (error) {
-      setIsLoading(false);
       console.log(error);
-      alert("error try again later");
-      router.push("/");
     }
-  };
-
-  const filterData = (data) => {
-    const filteredDataArr = [];
-    console.log(data);
-    data.allData.cards.forEach((card) => {
-      let duplicateCard = false;
-      if (card.printings.length > 1) {
-        for (let i = 0; i < filteredDataArr.length; i++) {
-          if (card.name === filteredDataArr[i].name) {
-            duplicateCard = true;
-            break;
-          }
-        }
-      }
-
-      if (!duplicateCard) {
-        filteredDataArr.push(card);
-      }
-    });
-    console.log(filteredDataArr);
-    setFilteredData({
-      data: filteredDataArr,
-      totalCount: data.totalCount,
-    });
-    setIsLoading(false);
   };
 
   return (
     <AppContext.Provider
       value={{
+        ...state,
         searchData,
-        filteredData,
-        currentSearchPage,
-        setCurrentSearchPage,
-        isLoading,
-        searchQuery,
-        setSearchQuery,
-        fetchData,
       }}
     >
       {children}
     </AppContext.Provider>
   );
-}
+};
+
+const useGlobalContext = () => {
+  return useContext(AppContext);
+};
+
+export { AppContext, AppProvider, useGlobalContext };

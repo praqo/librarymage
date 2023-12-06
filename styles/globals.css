@@ -14,3 +14,18 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.grid-item {
+  display: flex;
+  width: 20%;
+}
+
+.card-link,
+.card-link img {
+  width: 100%;
+}
