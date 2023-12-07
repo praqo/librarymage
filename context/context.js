@@ -17,8 +17,14 @@ const AppProvider = ({ children }) => {
       console.log(url);
       const response = await fetch(url);
       const data = await response.json();
-      console.log(data);
-      dispatch({ type: "SEARCH_RESULTS", payload: data });
+
+      dispatch({
+        type: "SEARCH_RESULTS",
+        payload: {
+          allData: data,
+          totalCount: response.headers.get("Total-Count"),
+        },
+      });
     } catch (error) {
       console.log(error);
     }

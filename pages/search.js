@@ -11,7 +11,7 @@ function search() {
   const [page, setPage] = useState(1);
 
   const { searchData, searchResults, isLoading } = useGlobalContext();
-
+  console.log(searchResults.allData);
   useEffect(() => {
     console.log(router.query.q);
     if (router.query.q) {
@@ -25,11 +25,14 @@ function search() {
 
   useEffect(() => {
     if (searchQuery) {
+      console.log(
+        `https://api.magicthegathering.io/v1/cards?name=${searchQuery}&page=${page}`
+      );
       searchData(
         `https://api.magicthegathering.io/v1/cards?name=${searchQuery}&page=${page}`
       );
     }
-  }, [searchQuery]);
+  }, [searchQuery, page]);
 
   if (isLoading) {
     return <h3>Loading...</h3>;
@@ -39,7 +42,7 @@ function search() {
     <div>
       <h3>Search results</h3>
       <div className="grid">
-        {searchResults.cards.map((card) => {
+        {searchResults.allData.cards.map((card) => {
           return (
             <div key={card.id} className="grid-item">
               <Link
@@ -53,7 +56,9 @@ function search() {
           );
         })}
       </div>
-      {fetchedData.totalCount / 100 > 1 && <Pagination data={fetchedData} />}
+      {searchResults.totalCount / 100 > 1 && (
+        <Pagination pageQuery={searchQuery} />
+      )}
     </div>
   );
 }
