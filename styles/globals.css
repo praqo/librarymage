@@ -29,3 +29,17 @@ a {
 .card-link img {
   width: 100%;
 }
+
+.pagination-button {
+  padding: 10px;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
+.active-button {
+  pointer-events: none;
+  background-color: white;
+  color: black;
+  cursor: none;
+}
