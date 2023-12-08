@@ -57,7 +57,7 @@ function search() {
         })}
       </div>
       {searchResults.totalCount / 100 > 1 && (
-        <Pagination pageQuery={searchQuery} />
+        <Pagination pageQuery={searchQuery} activePage={page} />
       )}
     </div>
   );

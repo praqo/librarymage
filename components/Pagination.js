@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useGlobalContext } from "../context/context";
 import Router, { useRouter } from "next/router";
 
-export default function Pagination({ pageQuery }) {
+export default function Pagination({ pageQuery, activePage }) {
   const router = useRouter();
   const { searchData, searchResults, isLoading } = useGlobalContext();
   const numerOfPages = Math.ceil(searchResults.totalCount / 100);
@@ -22,10 +22,20 @@ export default function Pagination({ pageQuery }) {
     <h5>
       Pages{" "}
       {[...Array(numerOfPages)].map((e, i) => {
+        const pageNum = i + 1;
+        console.log(typeof activePage);
         return (
-          <span key={i} onClick={() => handleClick(i + 1)}>
-            {i + 1}
-          </span>
+          <button
+            key={i}
+            onClick={() => handleClick(pageNum)}
+            className={
+              activePage === pageNum.toString()
+                ? "pagination-button active-button"
+                : "pagination-button"
+            }
+          >
+            {pageNum}
+          </button>
         );
       })}
     </h5>
