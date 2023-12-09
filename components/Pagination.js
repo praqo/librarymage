@@ -23,13 +23,13 @@ export default function Pagination({ pageQuery, activePage }) {
       Pages{" "}
       {[...Array(numerOfPages)].map((e, i) => {
         const pageNum = i + 1;
-        console.log(typeof activePage);
+        console.log(activePage);
         return (
           <button
             key={i}
             onClick={() => handleClick(pageNum)}
             className={
-              activePage === pageNum.toString()
+              +activePage === pageNum
                 ? "pagination-button active-button"
                 : "pagination-button"
             }

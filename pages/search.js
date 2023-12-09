@@ -6,33 +6,58 @@ import { useGlobalContext } from "../context/context";
 
 function search() {
   const router = useRouter();
-  const [fetchedData, setFetchedData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
 
   const { searchData, searchResults, isLoading } = useGlobalContext();
-  console.log(searchResults.allData);
+
+  const filterCardData = (data) => {
+    console.log(data);
+    const filteredData = [];
+    data.allData.cards.forEach((card) => {
+      let duplicateCard = false;
+      if (card.printings.length > 1) {
+        for (let i = 0; i < filteredData.length; i++) {
+          if (card.name === filteredData[i].name || !card.imageUrl) {
+            duplicateCard = true;
+            break;
+          }
+        }
+      }
+
+      if (!duplicateCard) {
+        filteredData.push(card);
+      }
+    });
+    console.log(filteredData);
+    setFilteredData(filteredData);
+  };
+
   useEffect(() => {
     console.log(router.query.q);
     if (router.query.q) {
       setSearchQuery(router.query.q);
     }
 
-    if (router.query.page) {
-      setPage(router.query.page);
-    }
+    setPage(router.query.page || 1);
   });
 
   useEffect(() => {
     if (searchQuery) {
-      console.log(
-        `https://api.magicthegathering.io/v1/cards?name=${searchQuery}&page=${page}`
-      );
       searchData(
         `https://api.magicthegathering.io/v1/cards?name=${searchQuery}&page=${page}`
       );
     }
   }, [searchQuery, page]);
+
+  useEffect(() => {
+    console.log(searchResults);
+    if (searchResults.length || searchResults.allData) {
+      filterCardData(searchResults);
+    }
+    console.log(filteredData);
+  }, [searchResults]);
 
   if (isLoading) {
     return <h3>Loading...</h3>;
@@ -40,9 +65,9 @@ function search() {
 
   return (
     <div>
-      <h3>Search results</h3>
+      <h3>Search results {page && `page ${page}`}</h3>
       <div className="grid">
-        {searchResults.allData.cards.map((card) => {
+        {filteredData.map((card) => {
           return (
             <div key={card.id} className="grid-item">
               <Link
