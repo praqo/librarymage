@@ -1,5 +1,11 @@
+import Link from "next/link";
+
 function Header() {
-  return <h3>Library Mage</h3>;
+  return (
+    <Link href="/">
+      <a>Library Mage</a>
+    </Link>
+  );
 }
 
 export default Header;

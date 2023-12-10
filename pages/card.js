@@ -40,8 +40,31 @@ function card() {
   }
 
   return (
-    <div>
-      <h3>{JSON.stringify(fetchedData)}</h3>
+    <div className="container">
+      <div className="grid">
+        <div className="left">
+          <img src={fetchedData.card.imageUrl} alt="" />
+        </div>
+        <div className="right">
+          <h3>{fetchedData.card.name}</h3>
+          <div>
+            <h5>legalities</h5>
+            {fetchedData.card.legalities.map((item) => {
+              return (
+                <div key={item.format}>
+                  {item.format}: {item.legality}
+                </div>
+              );
+            })}
+          </div>
+          <div>
+            <h5>printings</h5>
+            {fetchedData.card.printings.map((item) => {
+              return <span key={item}>{item}</span>;
+            })}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
