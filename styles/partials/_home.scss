@@ -1,8 +1,31 @@
-.container {
-  padding: 0 2rem;
+.main-home {
+  position: relative;
+  overflow: hidden;
 }
 
-.main {
+.main-home::after {
+  background: rgba(0, 0, 0, 0.2);
+  content: " ";
+  display: block;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  object-fit: cover;
+  min-height: 100%;
+  width: 100%;
+}
+
+.search-container {
   min-height: 100vh;
   padding: 4rem 0;
   flex: 1;

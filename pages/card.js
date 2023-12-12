@@ -42,11 +42,13 @@ function card() {
   return (
     <div className="container">
       <div className="grid">
-        <div className="left">
+        <div className="col">
+            <div className="card-name">{fetchedData.card.name}</div>
+          </div>
+        <div className="col">
           <img src={fetchedData.card.imageUrl} alt="" />
         </div>
-        <div className="right">
-          <h3>{fetchedData.card.name}</h3>
+        <div className="col">
           <div>
             <h5>legalities</h5>
             {fetchedData.card.legalities.map((item) => {
