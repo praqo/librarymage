@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-function card() {
+function Card() {
   const router = useRouter();
   const [fetchedData, setFetchedData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -70,4 +70,4 @@ function card() {
   );
 }
 
-export default card;
+export default Card;

@@ -4,7 +4,7 @@ import Link from "next/link";
 import Pagination from "../components/Pagination";
 import { useGlobalContext } from "../context/context";
 
-function search() {
+function Search() {
   const router = useRouter();
   const [filteredData, setFilteredData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -88,4 +88,4 @@ function search() {
   );
 }
 
-export default search;
+export default Search;
