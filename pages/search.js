@@ -13,7 +13,6 @@ function Search() {
   const { searchData, searchResults, isLoading } = useGlobalContext();
 
   const filterCardData = (data) => {
-    console.log(data);
     const filteredData = [];
     data.allData.cards.forEach((card) => {
       let duplicateCard = false;
@@ -30,12 +29,10 @@ function Search() {
         filteredData.push(card);
       }
     });
-    console.log(filteredData);
     setFilteredData(filteredData);
   };
 
   useEffect(() => {
-    console.log(router.query.q);
     if (router.query.q) {
       setSearchQuery(router.query.q);
     }
@@ -52,11 +49,9 @@ function Search() {
   }, [searchQuery, page]);
 
   useEffect(() => {
-    console.log(searchResults);
     if (searchResults.length || searchResults.allData) {
       filterCardData(searchResults);
     }
-    console.log(filteredData);
   }, [searchResults]);
 
   if (isLoading) {

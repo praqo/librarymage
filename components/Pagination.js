@@ -23,7 +23,6 @@ export default function Pagination({ pageQuery, activePage }) {
       Pages{" "}
       {[...Array(numerOfPages)].map((e, i) => {
         const pageNum = i + 1;
-        console.log(activePage);
         return (
           <button
             key={i}

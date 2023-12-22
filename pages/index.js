@@ -10,7 +10,7 @@ export default function Home() {
           <link rel="icon" href="/favicon.ico" />
         </Head>
       <main className="main-home">
-        <video className="hero-video" autoPlay="autoplay" loop="loop" muted="muted" playsInline="playsinline"><source src="https://videos.ctfassets.net/s5n2t79q9icq/5OjN7Y4jYPFzuoRxpXFpLJ/735410acffa42a0440bdb2d1cde2ca4b/znr_gen_a01_1920x1120_na.mp4" type="video/mp4" /></video>
+        <video className="hero-video" autoPlay="autoplay" loop="loop" muted={true} playsInline="playsinline"><source src="https://videos.ctfassets.net/s5n2t79q9icq/5OjN7Y4jYPFzuoRxpXFpLJ/735410acffa42a0440bdb2d1cde2ca4b/znr_gen_a01_1920x1120_na.mp4" type="video/mp4" /></video>
         
 
         <div className="search-container">

@@ -11,7 +11,6 @@ function Card() {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      console.log(data);
       setFetchedData(data);
       setIsLoading(false);
     } catch (error) {
@@ -23,7 +22,6 @@ function Card() {
 
   useEffect(() => {
     setSearchQuery(router.query.id);
-    console.log(searchQuery);
   });
 
   useEffect(() => {

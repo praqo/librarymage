@@ -14,7 +14,6 @@ const AppProvider = ({ children }) => {
   const searchData = async (url) => {
     dispatch({ type: "LOADING" });
     try {
-      console.log(url);
       const response = await fetch(url);
       const data = await response.json();
 

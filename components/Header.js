@@ -9,11 +9,6 @@ function Header() {
         </Link>
       </div>
       <nav className="header-nav">
-        <button className="header-search"></button>
-        <div className="header-menu">
-          <button className="menu-see"></button>
-          <button className="menu-burger"></button>
-        </div>
       </nav>
     </header>
   );
