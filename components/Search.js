@@ -7,6 +7,13 @@ function Search() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!inputValue.replace(/ /g, "")) {
+      setInputValue("");
+
+      return;
+    }
+    
     Router.push({
       pathname: "/search",
       query: { q: inputValue },
@@ -24,9 +31,6 @@ function Search() {
       <button type="submit" className="button">
         Search
       </button>
-      <Link href="/advancedSearch">
-        <a>Advance Search</a>
-      </Link>
     </form>
   );
   search;

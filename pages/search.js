@@ -55,16 +55,16 @@ function Search() {
   }, [searchResults]);
 
   if (isLoading) {
-    return <h3>Loading...</h3>;
+    return <h3 className="search-loader">Loading...</h3>;
   }
 
   return (
-    <div>
+    <div className="results-area">
       <h3>Search results {page && `page ${page}`}</h3>
-      <div className="grid">
+      <div className="search-grid">
         {filteredData.map((card) => {
           return (
-            <div key={card.id} className="grid-item">
+            <div key={card.id} className="search-item">
               <Link
                 href={{ pathname: "card", query: { id: card.multiverseid } }}
               >

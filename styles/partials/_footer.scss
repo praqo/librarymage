@@ -1,0 +1,18 @@
+.main-footer {
+    background-color: $grey-500;
+    padding: 100px 2rem;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-link {
+    color: $white-500;
+    width:fit-content;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}
