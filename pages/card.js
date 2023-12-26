@@ -33,19 +33,19 @@ function Card() {
   }, [searchQuery]);
 
   if (isLoading) {
-    return <h3>Loading...</h3>;
+    return <h3 className="search-loader">Loading...</h3>;
   }
 
   return (
-    <div className="container">
+    <div className="card-container">
       <div className="grid">
-        <div className="col">
+        <div className="title-col">
             <div className="card-name">{fetchedData.card.name}</div>
           </div>
-        <div className="col">
+        <div className="card-col">
+          <div className="card-image">
           <img src={fetchedData.card.imageUrl} alt="{fetchedData.card.name}" />
-        </div>
-        <div className="col">
+          </div>
           <div>
             <h5>legalities</h5>
             {fetchedData.card.legalities.map((item) => {
@@ -55,11 +55,9 @@ function Card() {
                 </div>
               );
             })}
-          </div>
-          <div>
             <h5>printings</h5>
             {fetchedData.card.printings.map((item) => {
-              return <span key={item}>{item}</span>;
+              return <span key={item}>{item} </span>;
             })}
           </div>
         </div>
