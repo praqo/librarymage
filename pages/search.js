@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Pagination from "../components/Pagination";
+import Loader from "../components/Loader";
 import { useGlobalContext } from "../context/context";
 
 function Search() {
@@ -55,7 +56,7 @@ function Search() {
   }, [searchResults]);
 
   if (isLoading) {
-    return <h3 className="search-loader">Loading...</h3>;
+    return  <Loader />;
   }
 
   return (

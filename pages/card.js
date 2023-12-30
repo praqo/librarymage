@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import  Loader from "../components/Loader";
 
 function Card() {
   const router = useRouter();
@@ -33,7 +34,7 @@ function Card() {
   }, [searchQuery]);
 
   if (isLoading) {
-    return <h3 className="search-loader">Loading...</h3>;
+    return <Loader />;
   }
 
   return (

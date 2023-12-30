@@ -1,0 +1,72 @@
+
+/* From https://codepen.io/justinryder/pen/YrXXOM */
+@keyframes spin-clockwise {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes spin-counter-clockwise {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.mtg-loading {
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+  height: 0;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.mtg-loading__mana-symbols {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 25%;
+  padding-bottom: 25%;
+  transform-origin: top left;
+  animation: spin-clockwise 5s infinite linear;
+}
+
+.mtg-loading__mana-symbols .mtg-mana {
+  position: absolute;
+  transform-origin: top left;
+  animation: spin-counter-clockwise 5s infinite linear;
+  width: 25%;
+  height: 25%;
+}
+
+.mtg-loading__mana-symbols .mtg-mana--white {
+  top: -50%;
+  left: 0%;
+}
+
+.mtg-loading__mana-symbols .mtg-mana--blue {
+  top: -15.45085%;
+  left: 47.55283%;
+}
+
+.mtg-loading__mana-symbols .mtg-mana--black {
+  top: 40.45085%;
+  left: 29.38926%;
+}
+
+.mtg-loading__mana-symbols .mtg-mana--red {
+  top: 40.45085%;
+  left: -29.38926%;
+}
+
+.mtg-loading__mana-symbols .mtg-mana--green {
+  top: -15.45085%;
+  left: -47.55283%;
+}
