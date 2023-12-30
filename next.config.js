@@ -4,6 +4,4 @@ module.exports = {
     loader: 'akamai',
     path: '',
   },
-  basePath: "/librarymage",
-  assetPrefix: "/librarymage/",
 }

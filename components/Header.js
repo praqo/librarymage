@@ -1,8 +1,8 @@
 import Link from "next/link";
 
-function Header() {
+function Header({positioned}) {
   return (
-    <header className="main-header">
+    <header className={positioned ? "main-header positioned" : "main-header"}>
       <div className="logo-area">
         <Link href="/">
           <a className="logo-link">Library Mage</a>
