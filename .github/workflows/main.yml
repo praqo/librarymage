@@ -40,6 +40,6 @@ jobs:
           personal_token: ${{ secrets.GITHUB_TOKEN }}
           external_repository: /librarymage
           publish_dir: ./out
-          user_name:
-          user_email: pradochris+@protonmail.com
+          user_name: praqo
+          user_email: 142553687+praqo@users.noreply.github.com
           publish_branch: gh-pages
