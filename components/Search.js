@@ -27,7 +27,7 @@ function Search() {
 
   return (
     <form onSubmit={handleSubmit} className="search-form">
-      <input type="text" value={inputValue} onChange={handleChange} />
+      <input size="1" type="text" value={inputValue} onChange={handleChange} />
       <button type="submit" className="button">
         Search
       </button>
